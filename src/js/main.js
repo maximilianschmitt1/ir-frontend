@@ -15,7 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: 'HomeController'
 		})
 		.state('results', {
-			url: '/results/:query',
+			url: '/results/:query/:page',
 			templateUrl: 'views/results.html',
 			controller: 'ResultsController'
 		});

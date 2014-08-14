@@ -15,7 +15,7 @@ var solrApi = function($http) {
 
 	return {
 		query: function(query) {
-			return jsonp(apiUrl + '/collection1/select', { params: { q: query } })
+			return jsonp(apiUrl + '/collection1/select', { params: query })
 				.then(function(data) {
 					var results = [];
 
@@ -30,7 +30,10 @@ var solrApi = function($http) {
 						results.push(result);
 					});
 
-					return results;
+					return {
+						numResults: data.data.response.numFound,
+						results: results
+					};
 				});
 		},
 		suggest: function(query) {

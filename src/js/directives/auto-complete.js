@@ -11,11 +11,11 @@ var autoComplete = function($http, solrApi) {
 				// limit number of characters that are shown in list item
 				response: function(event, ui) {
 					ui = ui.content.map(function(result) {
-						if (result.label.length < 57) {
+						if (result.label.length < 56) {
 							return;
 						}
 
-						result.label = result.label.substr(0, 57) + '...';
+						result.label = result.label.substr(0, 56) + '...';
 					});
 				}
 			});

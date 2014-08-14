@@ -21,13 +21,17 @@
 
 <div class="results">
 	<div class="wide-wrapper">
+		<p ng-if="numResults > 0">Deine Anfrage ergab <strong>{{ numResults }}</strong> Suchergebnisse.</p>
 		<div class="result" ng-repeat="result in results">
 			<p class="title"><a href="{{ result.url }}">{{ result.title }}</a></p>
 			<p class="url">{{ result.url }}</p>
 			<p class="description">{{ result.description }}</p>
 		</div>
-		<div ng-if="results.length < 1">
+		<div ng-if="numResults < 1">
 			<p>Deine Suche ergab keine Treffer.</p>
 		</div>
+		<ul class="pagination">
+			<li ng-repeat="n in [] | range:numResults/resultsPerPage | fromTo:pagingStart():15"><a ng-class="{ active: n + 1 === page }" ui-sref="results({ query: searchText, page: n + 1 })">{{ n + 1 }}</a></li>
+		</ul>
 	</div>
 </div>

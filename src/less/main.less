@@ -1,9 +1,21 @@
 @import "lib/normalize";
 @import "autocomplete";
+@import "pagination";
 
 * {
 	margin: 0;
 	padding: 0;
+}
+
+.clearfix{
+  zoom: 1;
+  &:before, &:after {
+  	content:"";
+	display: table;
+  }
+  &:after {
+	clear: both;
+  }
 }
 
 body {
