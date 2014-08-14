@@ -1,0 +1,33 @@
+<div class="header">
+	<div class="logo-container">
+		<img class="logo" alt="Logo der Suche" src="../images/logo.png">
+	</div>
+
+	<div class="wide-wrapper">
+		<form class="search-box" ng-submit="query(searchText)">
+			<input class="search-field-result" type="text" ng-model="searchText" placeholder="Suchbegriffe eingeben...">
+			<button class="search-button-result" type="submit">Suche</button>
+		</form>
+	</div>
+</div>
+
+<div class="navigation">
+	<a href="http://www.ur.de" class="grips_result">GRIPS</a>
+	<a href="https://netstorage.uni-regensburg.de/NetStorage/" class="k-laufwerk_result">K-Laufwerk</a>
+	<a href="https://www-flexnow.uni-regensburg.de/Flexnow/" class="flex-now_result">Flex-Now</a>
+	<a href="https://lsf.uni-regensburg.de/" class="lsf_result">LSF</a>
+	<a href="https://gw.uni-regensburg.de/gw/webacc" class="mail_result">Mail</a>
+</div>
+
+<div class="results">
+	<div class="wide-wrapper">
+		<div class="result" ng-repeat="result in results">
+			<p class="title"><a href="{{ result.url }}">{{ result.title }}</a></p>
+			<p class="url">{{ result.url }}</p>
+			<p class="description">{{ result.description }}</p>
+		</div>
+		<div ng-if="results.length < 1">
+			<p>Deine Suche ergab keine Treffer.</p>
+		</div>
+	</div>
+</div>
