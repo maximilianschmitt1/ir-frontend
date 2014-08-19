@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('web-search', ['ui.router']);
+var app = angular.module('web-search', ['ui.router', 'ngSanitize']);
 
 require('./bootstrap')(app);
 

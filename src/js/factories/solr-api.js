@@ -19,12 +19,15 @@ var solrApi = function($http) {
 				.then(function(data) {
 					var results = [];
 
-					data.data.response.docs.forEach(function(doc) {
-						var title = doc.title ? doc.title[0] : 'Unbenanntes Dokument';
+					var docs = data.data.response.docs;
+					var highlighting = data.data.highlighting;
+					console.log(highlighting);
+
+					docs.forEach(function(doc) {
 						var result = {
-							title: title,
+							title: highlighting[doc.url].title[0] || 'Unbenanntes Dokument',
 							url: doc.url,
-							description: doc.content[0].substr(0, 300)
+							description: highlighting[doc.url].content[0].trim()
 						};
 
 						results.push(result);
