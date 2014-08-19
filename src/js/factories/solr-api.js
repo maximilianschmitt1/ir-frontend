@@ -43,17 +43,24 @@ var solrApi = function($http) {
 				});
 		},
 		suggest: function(query) {
-			return jsonp(apiUrl + '/suggest', {
+			return jsonp(apiUrl + '/collection1/select', {
 					params: {
-						'suggest.dictionary': 'mySuggester',
-						'suggest': 'true',
-						'suggest.build': 'true',
-						'suggest.q': query
+						'q': '*.*',
+						'rows': 0,
+						'facet': true,
+						'facet.limit': 7,
+						'facet.field': 'title',
+						'facet.prefix': query
 					}
 				}).then(function(data) {
-					var suggestionsResponse = data.data.suggest.mySuggester[query].suggestions;
-					var suggestions = suggestionsResponse.map(function(suggestion) {
-						return suggestion.term;
+					var suggestionsResponse = data.data.facet_counts.facet_fields.title;
+					var suggestions = [];
+					suggestionsResponse.forEach(function(suggestion) {
+						if (typeof suggestion === 'number') {
+							return;
+						}
+
+						suggestions.push(suggestion);
 					});
 
 					return suggestions;
