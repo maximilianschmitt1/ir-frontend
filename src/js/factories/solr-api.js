@@ -21,11 +21,14 @@ var solrApi = function($http) {
 
 					var docs = data.data.response.docs;
 					var highlighting = data.data.highlighting;
-					console.log(highlighting);
 
 					docs.forEach(function(doc) {
+						var title = highlighting[doc.url].title[0] || 'Unbenanntes Dokument';
+						var suffixIndex = title.indexOf(' - Universität Regensburg');
+						title =  suffixIndex === -1 ? title : title.substr(0, suffixIndex);
+
 						var result = {
-							title: highlighting[doc.url].title[0] || 'Unbenanntes Dokument',
+							title: title,
 							url: doc.url,
 							description: highlighting[doc.url].content[0].trim()
 						};
