@@ -1,7 +1,7 @@
 <div class="wrapper">
 	<img src="images/logo.png" alt="UR Search">
 	<form class="search-box" ng-submit="search(searchText)">
-		<input class="search-field" auto-complete type="text" ng-model="searchText" placeholder="Suchbegriffe eingeben...">
+		<input class="search-field" auto-complete="search(searchText)" type="text" ng-model="searchText" placeholder="Suchbegriffe eingeben...">
 		<button class="search-button" type="submit">Suche</button>
 	</form>
 	<div class="quick-navigation">

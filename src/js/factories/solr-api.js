@@ -21,16 +21,23 @@ var solrApi = function($http) {
 
 					var docs = data.data.response.docs;
 					var highlighting = data.data.highlighting;
+					var spellSuggestion = null;
+
+					if (data.data.spellcheck.suggestions[1]) {
+						spellSuggestion = data.data.spellcheck.suggestions[1].suggestion[0];
+					}
 
 					docs.forEach(function(doc) {
 						var title = highlighting[doc.url].title[0] || 'Unbenanntes Dokument';
 						var suffixIndex = title.indexOf(' - Universität Regensburg');
 						title =  suffixIndex === -1 ? title : title.substr(0, suffixIndex);
 
+						var description = highlighting[doc.url].content[0].trim();
+
 						var result = {
 							title: title,
 							url: doc.url,
-							description: highlighting[doc.url].content[0].trim()
+							description: description
 						};
 
 						results.push(result);
@@ -38,10 +45,12 @@ var solrApi = function($http) {
 
 					return {
 						numResults: data.data.response.numFound,
-						results: results
+						results: results,
+						spellSuggestion: spellSuggestion
 					};
 				});
 		},
+
 		suggest: function(query) {
 			return jsonp(apiUrl + '/collection1/select', {
 					params: {

@@ -22,6 +22,7 @@ var ResultsController = function($scope, $stateParams, $state, solrApi) {
 	}).then(function(response) {
 		$scope.numResults = parseInt(response.numResults, 10);
 		$scope.results = response.results;
+		$scope.spellSuggestion = response.spellSuggestion;
 	});
 };
 
