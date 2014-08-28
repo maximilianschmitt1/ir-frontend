@@ -12,11 +12,11 @@
 </div>
 
 <div class="navigation">
-	<a href="http://www.ur.de" class="grips_result">GRIPS</a>
-	<a href="https://netstorage.uni-regensburg.de/NetStorage/" class="k-laufwerk_result">K-Laufwerk</a>
-	<a href="https://www-flexnow.uni-regensburg.de/Flexnow/" class="flex-now_result">Flex-Now</a>
-	<a href="https://lsf.uni-regensburg.de/" class="lsf_result">LSF</a>
-	<a href="https://gw.uni-regensburg.de/gw/webacc" class="mail_result">Mail</a>
+	<a href="http://www.ur.de" ng-class="{ active: quickLinkSuggestion === 'grips' }" class="grips_result">GRIPS</a>
+	<a href="https://netstorage.uni-regensburg.de/NetStorage/" ng-class="{ active: quickLinkSuggestion === 'k-laufwerk' }" class="k-laufwerk_result">K-Laufwerk</a>
+	<a href="https://www-flexnow.uni-regensburg.de/Flexnow/" ng-class="{ active: quickLinkSuggestion === 'flexnow' }" class="flex-now_result">Flex-Now</a>
+	<a href="https://lsf.uni-regensburg.de/" ng-class="{ active: quickLinkSuggestion === 'lsf' }" class="lsf_result">LSF</a>
+	<a href="https://gw.uni-regensburg.de/gw/webacc" ng-class="{ active: quickLinkSuggestion === 'mail' }" class="mail_result">Mail</a>
 </div>
 
 <div class="results">
