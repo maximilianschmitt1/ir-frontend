@@ -52,16 +52,28 @@ var solrApi = function($http) {
 		},
 
 		suggest: function(query) {
+			query = query.toLowerCase();
+			var searchTerms = query.split(' ');
+			var filterQuery = searchTerms.slice(0, searchTerms.length - 1).join(' ');
+			var lastSearchTerm = searchTerms[searchTerms.length - 1];
+
+			var params =  {
+				'q': '*.*',
+				'rows': 0,
+				'facet': true,
+				// 'facet.limit': 7,
+				'facet.field': 'title',
+				'facet.prefix': lastSearchTerm
+			};
+
+			if (filterQuery) {
+				params.fq = 'title:' + filterQuery;
+			}
+
 			return jsonp(apiUrl + '/collection1/select', {
-					params: {
-						'q': '*.*',
-						'rows': 0,
-						'facet': true,
-						'facet.limit': 7,
-						'facet.field': 'title',
-						'facet.prefix': query
-					}
+					params: params
 				}).then(function(data) {
+					console.log(data);
 					var suggestionsResponse = data.data.facet_counts.facet_fields.title;
 					var suggestions = [];
 					suggestionsResponse.forEach(function(suggestion) {
@@ -69,7 +81,7 @@ var solrApi = function($http) {
 							return;
 						}
 
-						suggestions.push(suggestion);
+						suggestions.push(filterQuery + ' ' + suggestion);
 					});
 
 					return suggestions;
