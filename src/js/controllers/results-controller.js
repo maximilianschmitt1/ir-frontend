@@ -12,6 +12,28 @@ var ResultsController = function($scope, $stateParams, $state, solrApi) {
 	$scope.searchText     = $stateParams.query;
 	$scope.page           = $stateParams.page ? Math.max(parseInt($stateParams.page, 10), 1) : 1;
 
+	if ($scope.searchText === 'wobble') {
+		var elements = angular.element('*').not('div').not('body').not('html').addClass('animated').addClass('wobble');
+		setTimeout(function() {
+			elements.removeClass('animated').removeClass('wobble');
+		}, 1000);
+	}
+
+	if ($scope.searchText === 'boom') {
+		var elements = angular.element('*').not('div').not('body').not('html').addClass('animated').addClass('boom');
+		setTimeout(function() {
+			elements.removeClass('animated').removeClass('boom');
+		}, 1000);
+	}
+
+	if ($scope.searchText === 'florian meier') {
+		angular.element('.logo').attr('src', '../images/logo-meier.png');
+	}
+
+	if ($scope.searchText === 'wolff' || $scope.searchText === 'christian wolff') {
+		angular.element('.logo').attr('src', '../images/logo-wolff.png');
+	}
+
 	$scope.resultsPerPage = 10;
 	$scope.visiblePages   = 15;
 

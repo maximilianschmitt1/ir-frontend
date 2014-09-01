@@ -15,6 +15,7 @@ var solrApi = function($http) {
 
 	return {
 		query: function(query) {
+			query = query || '';
 			return jsonp(apiUrl + '/collection1/select', { params: query })
 				.then(function(data) {
 					var results = [];
@@ -23,7 +24,7 @@ var solrApi = function($http) {
 					var highlighting = data.data.highlighting;
 					var spellSuggestion = null;
 
-					if (data.data.spellcheck.suggestions[1]) {
+					if (data.data.spellcheck && data.data.spellcheck.suggestions[1]) {
 						spellSuggestion = data.data.spellcheck.suggestions[1].suggestion[0];
 					}
 
@@ -42,6 +43,11 @@ var solrApi = function($http) {
 
 						results.push(result);
 					});
+
+					var numResults = data.data.response.numFound;
+					if (numResults < 1 && !spellSuggestion && query.q.toLowerCase() !== 'florian meier') {
+						spellSuggestion = 'florian meier';
+					}
 
 					return {
 						numResults: data.data.response.numFound,
@@ -73,7 +79,6 @@ var solrApi = function($http) {
 			return jsonp(apiUrl + '/collection1/select', {
 					params: params
 				}).then(function(data) {
-					console.log(data);
 					var suggestionsResponse = data.data.facet_counts.facet_fields.title;
 					var suggestions = [];
 					suggestionsResponse.forEach(function(suggestion) {
