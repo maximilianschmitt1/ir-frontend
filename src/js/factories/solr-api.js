@@ -67,7 +67,7 @@ var solrApi = function($http) {
 				'q': '*.*',
 				'rows': 0,
 				'facet': true,
-				// 'facet.limit': 7,
+				'facet.limit': 7 + searchTerms.length,
 				'facet.field': 'title',
 				'facet.prefix': lastSearchTerm
 			};
@@ -86,7 +86,9 @@ var solrApi = function($http) {
 							return;
 						}
 
-						suggestions.push(filterQuery + ' ' + suggestion);
+						if (searchTerms.indexOf(suggestion) === -1) {
+							suggestions.push(filterQuery + ' ' + suggestion);
+						}
 					});
 
 					return suggestions;
