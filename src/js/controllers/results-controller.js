@@ -5,7 +5,7 @@ var quickLinksIndex = {
 	'lsf': [ 'vorlesungsverzeichnis', 'stundenplan', 'vorlesungen', 'veranstaltungen', 'kurse'],
 	'k-laufwerk': ['k laufwerk', 'netstorage', 'kurslaufwerk', 'kurssoft', 'k drive','k-drive', 'laufwerk k', 'k server','kurs laufwerk', 'net storage' , 'klaufwerk', 'kdrive'],
 	'mail': ['e-mail', 'email', 'group wise', 'uni mail',  'unimail', 'groupwise'],
-	'flexnow': ['prüfungsergebnisse', 'noten', 'studentendaten', 'prüfungsanmeldung']
+	'flexnow': ['flex now', 'flex-now', 'prüfungsergebnisse', 'noten', 'studentendaten', 'prüfungsanmeldung']
 };
 
 var ResultsController = function($scope, $stateParams, $state, solrApi) {
@@ -44,7 +44,7 @@ var ResultsController = function($scope, $stateParams, $state, solrApi) {
 	};
 
 	$scope.query = function(searchText) {
-		$state.go($state.current.name, { query: searchText });
+		$state.go($state.current.name, { query: searchText, page: 1 });
 	};
 
 	solrApi.query({
@@ -58,6 +58,8 @@ var ResultsController = function($scope, $stateParams, $state, solrApi) {
 	});
 
 	function getQuickLinkSuggestion(searchText) {
+		searchText = searchText.toLowerCase();
+
 		for (var quickLink in quickLinksIndex) {
 			if (quickLink === searchText) {
 				return quickLink;
