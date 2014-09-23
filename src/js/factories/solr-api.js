@@ -15,7 +15,9 @@ var solrApi = function($http) {
 
 	return {
 		query: function(query) {
-			query = query || '';
+			query = query || {};
+			query.defType = 'dismax';
+			query.qf = 'title^10.0';
 			return jsonp(apiUrl + '/collection1/select', { params: query })
 				.then(function(data) {
 					var results = [];
