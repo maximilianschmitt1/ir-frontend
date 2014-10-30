@@ -9,8 +9,8 @@ var quickLinksIndex = {
 };
 
 var ResultsController = function($scope, $stateParams, $state, solrApi) {
-	$scope.searchText     = $stateParams.query;
-	$scope.page           = $stateParams.page ? Math.max(parseInt($stateParams.page, 10), 1) : 1;
+	$scope.searchText = $stateParams.query;
+	$scope.page       = $stateParams.page ? Math.max(parseInt($stateParams.page, 10), 1) : 1;
 
 	if ($scope.searchText === 'wobble') {
 		var elements = angular.element('*').not('div').not('body').not('html').addClass('animated').addClass('wobble');

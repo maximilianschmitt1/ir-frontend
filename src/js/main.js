@@ -5,7 +5,6 @@ var app = angular.module('web-search', ['ui.router', 'ngSanitize']);
 require('./bootstrap')(app);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-
 	$urlRouterProvider.otherwise('/');
 
 	$stateProvider

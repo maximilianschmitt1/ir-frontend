@@ -17,7 +17,7 @@ var solrApi = function($http) {
 		query: function(query) {
 			query = query || {};
 			query.defType = 'dismax';
-			query.qf = 'title^10.0';
+			query.qf = 'text^1.0 title^10.0';
 			return jsonp(apiUrl + '/collection1/select', { params: query })
 				.then(function(data) {
 					var results = [];
@@ -47,9 +47,6 @@ var solrApi = function($http) {
 					});
 
 					var numResults = data.data.response.numFound;
-					if (numResults < 1 && !spellSuggestion && query.q.toLowerCase() !== 'florian meier') {
-						spellSuggestion = 'florian meier';
-					}
 
 					return {
 						numResults: data.data.response.numFound,

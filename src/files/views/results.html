@@ -21,18 +21,17 @@
 
 <div class="results">
 	<div class="wide-wrapper">
-		<p ng-if="numResults > 0">Deine Anfrage ergab <strong>{{ numResults }}</strong> Suchergebnisse. <span class="spell-suggestion" ng-show="spellSuggestion">Meintest du <a ui-sref="results({ query: spellSuggestion })" ng-class="{ 'meier-icon': spellSuggestion === 'florian meier' }" >{{ spellSuggestion }}</a>?</span></p>
+		<p ng-if="numResults > 0">Deine Anfrage ergab <strong>{{ numResults }}</strong> Suchergebnisse. <span class="spell-suggestion" ng-show="spellSuggestion">Meintest du <a ui-sref="results({ query: spellSuggestion, page: 1 })" >{{ spellSuggestion }}</a>?</span></p>
 		<div class="result" ng-repeat="result in results">
 			<p class="title"><a ng-href="{{result.url}}" ng-bind-html="result.title"></a></p>
 			<p class="url" ng-bind="result.url"></p>
 			<p class="description" ng-bind-html="result.description"></p>
 		</div>
 		<div ng-if="numResults < 1">
-			<p>Deine Suche ergab keine Treffer. <span class="spell-suggestion" ng-show="spellSuggestion">Meintest du <a ui-sref="results({ query: spellSuggestion })" ng-class="{ 'meier-icon': spellSuggestion === 'florian meier' }" >{{ spellSuggestion }}</a>?</span></p>
+			<p>Deine Suche ergab keine Treffer. <span class="spell-suggestion" ng-show="spellSuggestion">Meintest du <a ui-sref="results({ query: spellSuggestion, page: 1 })">{{ spellSuggestion }}</a>?</span></p>
 		</div>
 		<ul class="pagination">
 			<li ng-repeat="n in [] | range:numResults/resultsPerPage | fromTo:pagingStart():15"><a ng-class="{ active: n + 1 === page }" ui-sref="results({ query: searchText, page: n + 1 })">{{ n + 1 }}</a></li>
 		</ul>
 	</div>
 </div>
-<img src="images/easteregg.png" alt="wobble" class="easteregg animated boom" ng-show="searchText === 'florian meier'">
